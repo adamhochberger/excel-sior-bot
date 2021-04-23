@@ -21,7 +21,7 @@ async def on_ready():
         f'{guild.name}(id: {guild.id})\n'
     )
 
-    members = '\n - '.join([member.name for member in guild.members])
-    print(f'Guild Members:\n - {members}')
+    text_channels = '\n - '.join([channel.name for channel in guild.text_channels])
+    print(f'Guild text_channels:\n - {text_channels}')
 
 client.run(TOKEN)

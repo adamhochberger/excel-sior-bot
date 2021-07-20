@@ -1,19 +1,15 @@
 # parse_wiki_page.py
-import requests
-from bs4 import BeautifulSoup
-
+from gazpacho import get, Soup
 
 class Parser:
-    the_soup = None
 
     def __init__(self, url):
+        self.the_soup = None
         self.make_the_soup(url)
 
     def make_the_soup(self, url):
-        resp = requests.get(url)
-        soup = BeautifulSoup(resp.content, 'html.parser')
-
-        self.the_soup = soup
+        html = get(url)
+        self.the_soup = Soup(html)
 
     def remake_the_soup(self, url):
         self.make_the_soup(url)

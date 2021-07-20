@@ -1,6 +1,6 @@
 # bot.py
 import os
-from parse_wiki_page import parse_anchors
+from parse_wiki_page import Parser
 
 import discord
 from dotenv import load_dotenv
@@ -25,7 +25,9 @@ async def on_ready():
 
     text_channels = '\n - '.join([channel.name for channel in guild.text_channels])
     print(f'Guild text_channels:\n - {text_channels}')
-    url = "https://leagueoflegends.fandom.com/wiki/Annie/LoL"
-    parse_anchors(url)
+    
+    # url = "https://leagueoflegends.fandom.com/wiki/Annie/LoL"
+    # parser = Parser(url)
+    # parser.parse_ability()
     
 client.run(TOKEN)

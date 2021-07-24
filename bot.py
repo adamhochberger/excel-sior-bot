@@ -51,11 +51,20 @@ async def on_ready():
             option_type=3,
             required=True,
             choices=[create_choice(name=item, value=item) for item in ITEMS_LIST]
-        )
+        ),
+        # create_option(
+        #     name="show_enhancers_and_dollars",
+        #     description="Select this if you want to show the Item Enhancers and Money per level of the item",
+        #     option_type=5,
+        #     required=True
+        # )
+
     ]
 )
 async def _unite_item(ctx: SlashContext, item_name: str):
-    parsed_string = UniteParser(item_name).csv_parse()
+    unite_parser = UniteParser(item_name)
+    parsed_string = unite_parser.read_description_from_csv()
+    parsed_string += unite_parser.read_stats_from_csv()
 
     for chunk in split_string(parsed_string):
         await ctx.send("```" + chunk + "```")

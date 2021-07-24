@@ -1,33 +1,34 @@
 # bot.py
 import os
 from parse_wiki_page import Parser
+from UniteParser import UniteParser
 
-import discord
+from discord import Client, Intents, Embed
+from discord_slash import SlashCommand, SlashContext
 from dotenv import load_dotenv
 
 load_dotenv()
+
 TOKEN = os.getenv('DISCORD_TOKEN')
-GUILD = os.getenv('DISCORD_GUILD')
+GUILD = [int(os.getenv('DISCORD_GUILD'))]
 
-client = discord.Client()
+bot = Client(intents=Intents.default())
+slash = SlashCommand(bot, sync_commands=True)
 
-
-@client.event
+@bot.event
 async def on_ready():
-    for guild in client.guilds:
-        if guild.name == GUILD:
-            break
+    print("Ready!")
 
-    print(
-        f'{client.user} is connected to the following guild:\n'
-        f'{guild.name}(id: {guild.id})\n'
-    )
+@slash.slash(name="unite_item",  guild_ids=GUILD)
+async def _unite_item(ctx: SlashContext):
+    # name = ctx.args[0]
+    # parsed_string = UniteParser(name).csv_parse()
+    # await ctx.send(parsed_string)
 
-    text_channels = '\n - '.join([channel.name for channel in guild.text_channels])
-    print(f'Guild text_channels:\n - {text_channels}')
-    
-    # url = "https://leagueoflegends.fandom.com/wiki/Annie/LoL"
-    # parser = Parser(url)
-    # parser.parse_ability()
-    
-client.run(TOKEN)
+    await ctx.send("Test")
+
+@slash.slash(name="ping", guild_ids=GUILD)
+async def _ping(ctx): # Defines a new "context" (ctx) command called "ping."
+    await ctx.send(f"Pong! ({bot.latency*1000}ms)")
+
+bot.run(TOKEN)

@@ -42,11 +42,9 @@ class UniteParser():
         for row in csv_as_list:
             key_string = row[0]
 
-            for column_name in self.COLUMN_LIST:
-                if column_name in key_string:
-                    if column_name == UniteInformation.LEVELS.value and column_name == key_string or column_name in UniteItems.values_list():
-                        key_string = key_string.replace(column_name + " ", "")
-                        self.item_dictionary[key_string] = row[1:]
+            if key_string == UniteInformation.LEVELS.value or self.item_to_print in key_string:
+                key_string = key_string.replace(self.item_to_print + " ", "")
+                self.item_dictionary[key_string] = row[1:]
 
         item_table_string = tabulate(self.item_dictionary, headers="keys", tablefmt="pretty")
         return item_table_string

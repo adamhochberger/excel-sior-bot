@@ -5,7 +5,7 @@ from discord_slash import SlashCommand, SlashContext
 from discord_slash.utils.manage_commands import create_option, create_choice
 from dotenv import load_dotenv
 
-from Item import Information, Items
+from PiotEnum import UniteInformation, UniteItems
 from UniteParser import UniteParser
 from utility_functions import convert_string_to_codeblock_string, split_string
 
@@ -31,7 +31,7 @@ async def on_ready():
             description="This is the item that you want to view stats on.",
             option_type=3,
             required=True,
-            choices=[create_choice(name=item, value=item) for item in Items.values_list()]
+            choices=[create_choice(name=item, value=item) for item in UniteItems.values_list()]
         ),
         # create_option(
         #     name="show_enhancers_and_dollars",

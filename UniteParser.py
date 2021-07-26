@@ -1,11 +1,11 @@
 import csv
 from tabulate import tabulate
-from Item import Information, Items
+from PiotEnum import UniteInformation, UniteItems
 
 class UniteParser():
     
     def __init__(self, item):
-        self.COLUMN_LIST = [Information.LEVELS.value, item]
+        self.COLUMN_LIST = [UniteInformation.LEVELS.value, item]
         self.item_dictionary = {}
         self.item_to_print = item
 
@@ -14,7 +14,7 @@ class UniteParser():
             reader = csv.reader(csv_file)
             csv_as_list = []
             for row in reader:
-                if row[0] == Information.LEVELS.value or self.item_to_print in row[0]:
+                if row[0] == UniteInformation.LEVELS.value or self.item_to_print in row[0]:
                     csv_as_list.append(row)
 
             return csv_as_list
@@ -44,7 +44,7 @@ class UniteParser():
 
             for column_name in self.COLUMN_LIST:
                 if column_name in key_string:
-                    if column_name == Information.LEVELS.value and column_name == key_string or column_name in Items.values_list():
+                    if column_name == UniteInformation.LEVELS.value and column_name == key_string or column_name in UniteItems.values_list():
                         key_string = key_string.replace(column_name + " ", "")
                         self.item_dictionary[key_string] = row[1:]
 
@@ -53,5 +53,5 @@ class UniteParser():
 
 # if __name__ == "__main__":
     
-#     print(UniteParser(Items.SCOPE_LENS.value).read_description_from_csv())
-#     print(UniteParser(Items.SCOPE_LENS.value).read_stats_from_csv())
+#     print(UniteParser(UniteItems.SCOPE_LENS.value).read_description_from_csv())
+#     print(UniteParser(UniteItems.SCOPE_LENS.value).read_stats_from_csv())

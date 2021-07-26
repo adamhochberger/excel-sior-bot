@@ -6,7 +6,7 @@ class BaseEnum(enum.Enum):
         return list(map(lambda c: c.value, cls))
 
 
-class Items(BaseEnum):
+class UniteItems(BaseEnum):
     MUSCLE_BAND = "Muscle Band"
     SCOPE_LENS = 'Scope Lens'
     SHELL_BELL = 'Shell Bell'
@@ -24,7 +24,7 @@ class Items(BaseEnum):
     ROCKY_HELMET = 'Rocky Helmet'
 
 
-class Information(BaseEnum):
+class UniteInformation(BaseEnum):
     LEVELS = 'Levels'
     ITEM_ENHANCERS = 'Item Enhancers'
     ITEM_ENHANCERS_PER_LEVEL = 'Item Enhancers / Level'

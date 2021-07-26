@@ -1,6 +1,12 @@
 import enum
 
-class Items(enum.Enum):
+class BaseEnum(enum.Enum):
+    @classmethod
+    def values_list(cls):
+        return list(map(lambda c: c.value, cls))
+
+
+class Items(BaseEnum):
     MUSCLE_BAND = "Muscle Band"
     SCOPE_LENS = 'Scope Lens'
     SHELL_BELL = 'Shell Bell'
@@ -16,3 +22,12 @@ class Items(enum.Enum):
     LEFTOVERS = 'Leftovers'
     ASSAULT_VEST = 'Assault Vest'
     ROCKY_HELMET = 'Rocky Helmet'
+
+
+class Information(BaseEnum):
+    LEVELS = 'Levels'
+    ITEM_ENHANCERS = 'Item Enhancers'
+    ITEM_ENHANCERS_PER_LEVEL = 'Item Enhancers / Level'
+    DOLLARS = 'Dollars'
+    DOLLARS_PER_LEVEL = 'Dollars / Level'
+    

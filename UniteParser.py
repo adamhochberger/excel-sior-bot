@@ -1,29 +1,27 @@
 import csv
 from tabulate import tabulate
-
-ITEMS_LIST = ['Muscle Band', 'Scope Lens', 'Shell Bell', 'Wise Glasses', 'Focus Band', 'Energy Amplifier', 'Float Stone', 'Buddy Barrier', 'Score Shield', 'Aeos Cookie', 'Attack Weight', 'Sp Atk Specs', 'Leftovers', 'Assault Vest', 'Rocky Helmet']
-INFO_LIST =  ['Levels', 'Enhancers', 'Dollars / Level']
+from Item import Information, Items
 
 class UniteParser():
     
-    def __init__(self, item, ):
-        #[print(item) for item in (Items)]
-        self.CONSTANTS_LIST = INFO_LIST + [item]
-        self.item_dictionary = {key: {} for key in self.CONSTANTS_LIST}
+    def __init__(self, item):
+        self.COLUMN_LIST = [Information.LEVELS.value, item]
+        self.item_dictionary = {}
         self.item_to_print = item
 
     def parse_csv(self, filename):    
         with open(filename, 'r') as csv_file:
             reader = csv.reader(csv_file)
-            big_list = []
+            csv_as_list = []
             for row in reader:
-                big_list.append(row)
+                if row[0] == Information.LEVELS.value or self.item_to_print in row[0]:
+                    csv_as_list.append(row)
 
-        return zip(*big_list)
+            return csv_as_list
 
     def read_description_from_csv(self):
-        transposed_csv = self.parse_csv("description_sheet.csv")
-        for row in transposed_csv:
+        csv_as_list = self.parse_csv("description_sheet.csv")
+        for row in csv_as_list:
             key_string = row[0]
 
             if self.item_to_print in key_string:
@@ -40,22 +38,20 @@ class UniteParser():
                 return description_string
 
     def read_stats_from_csv(self):
-        transposed_csv = self.parse_csv("stat_sheet.csv")
-        for row in transposed_csv:
+        csv_as_list = self.parse_csv("stat_sheet.csv")
+        for row in csv_as_list:
             key_string = row[0]
-        
-            for constant in self.CONSTANTS_LIST:
-                if key_string.find(constant) >= 0:
-                    key_string = key_string.replace(constant + " ", "")
-                    self.item_dictionary[constant][key_string] = row[1:]
-        
-        constants_with_item = {key: self.item_dictionary[key][key] for key in INFO_LIST}
-        for key, value in self.item_dictionary[self.item_to_print].items():
-            constants_with_item[key] = value
 
-        item_table_string = self.item_to_print + "\n" + tabulate(constants_with_item, headers="keys", tablefmt="pretty")
-        # print(item_table_string)
+            for column_name in self.COLUMN_LIST:
+                if column_name in key_string:
+                    if column_name == Information.LEVELS.value and column_name == key_string or column_name in Items.values_list():
+                        key_string = key_string.replace(column_name + " ", "")
+                        self.item_dictionary[key_string] = row[1:]
+
+        item_table_string = tabulate(self.item_dictionary, headers="keys", tablefmt="pretty")
         return item_table_string
 
-if __name__ == "__main__":
-    UniteParser(None)
+# if __name__ == "__main__":
+    
+#     print(UniteParser(Items.SCOPE_LENS.value).read_description_from_csv())
+#     print(UniteParser(Items.SCOPE_LENS.value).read_stats_from_csv())

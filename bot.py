@@ -1,33 +1,13 @@
 # bot.py
 import os
-# from parse_wiki_page import Parser
-from UniteParser import UniteParser, INFO_LIST, ITEMS_LIST
-
-from discord import Client, Intents, Embed
+from discord import Client, Intents
 from discord_slash import SlashCommand, SlashContext
 from discord_slash.utils.manage_commands import create_option, create_choice
 from dotenv import load_dotenv
 
-def split_string(table_string):
-    n = 1994
-    if len(table_string) > n:
-        chunks = []
-        i = 0
-        while True:
-            if len(table_string) - i < n:
-                chunk = table_string[i:len(table_string)]
-                chunks.append(chunk)
-                break
-            else:
-                newline_position = table_string.rfind("\n", i, i+n)            
-                newline_position = newline_position+1
-                chunk = table_string[i:newline_position]
-                i = newline_position
-                chunks.append(chunk)
-        
-        return chunks
-    else:
-        return [table_string]    
+from Item import Information, Items
+from UniteParser import UniteParser
+from utility_functions import convert_string_to_codeblock_string, split_string
 
 load_dotenv()
 
@@ -41,7 +21,8 @@ slash = SlashCommand(bot, sync_commands=True)
 async def on_ready():
     print("Ready!")
 
-@slash.slash(name="unite_item", 
+@slash.slash(
+    name="unite_item", 
     description="Allows you to check information about an item from Pokemon Unite", 
     guild_ids=GUILD,
     options=[
@@ -50,7 +31,7 @@ async def on_ready():
             description="This is the item that you want to view stats on.",
             option_type=3,
             required=True,
-            choices=[create_choice(name=item, value=item) for item in ITEMS_LIST]
+            choices=[create_choice(name=item, value=item) for item in Items.values_list()]
         ),
         # create_option(
         #     name="show_enhancers_and_dollars",
@@ -63,15 +44,15 @@ async def on_ready():
 )
 async def _unite_item(ctx: SlashContext, item_name: str):
     unite_parser = UniteParser(item_name)
-    parsed_string = unite_parser.read_description_from_csv()
-    parsed_string += unite_parser.read_stats_from_csv()
+    table_string = unite_parser.read_description_from_csv()
+    table_string += unite_parser.read_stats_from_csv()
 
-    for chunk in split_string(parsed_string):
-        await ctx.send("```" + chunk + "```")
+    for section in split_string(table_string):
+        await ctx.send(convert_string_to_codeblock_string(section))
     
 
 @slash.slash(name="ping", guild_ids=GUILD)
-async def _ping(ctx): # Defines a new "context" (ctx) command called "ping."
+async def _ping(ctx): 
     await ctx.send(f"Pong! ({bot.latency*1000}ms)")
 
 bot.run(TOKEN)

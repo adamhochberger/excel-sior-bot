@@ -1,5 +1,16 @@
-,Muscle Band,Scope Lens,Shell Bell,Wise Glasses,Focus Band,Energy Amplifier,Float Stone,Buddy Barrier,Score Shield,Aeos Cookie,Attack Weight,Sp Atk Specs,Leftovers,Assault Vest,Rocky Helmet
-Description,"When basic attacks hit, the damage is increased by {value}% of the opponent's opposing HP","Increases the damage of basic attack critical hits. The higher the Pokémon's Attack, the more the damage increases","When the Pokémon hits with a move, it recovers a minimum of {value} HP. The higher the Pokémon's Sp. Atk, the more HP it recovers",Increases Sp. Atk by {value}%,"When the Pokémon drops to low HP, then each second for three seconds, it recovers {value}% of the HP it had lost","After the Pokémon uses its Unite Move, the damage the Pokémon deals is increased by {value}% for a short time",Increases movement speed by {value}% when the Pokémon is not in combat,"When the Pokémon uses its Unite Move, that Pokémon and the nearby ally Pokémon with the lowest HP are each granted a shield equal to {value}% of their max HP","While the Pokémon is attempting to score a goal, it is granted a shield equal to {value}% of its max HP and its goals cannot be interrupted while it is shielded","When the Pokémon scores a goal, its max HP increases by {value}","When the Pokémon scores a goal, its Attack increases by {value}","When the Pokémon scores a goal, its Sp. Atk increases by {value}","When the Pokémon is not in combat, it recovers {value}% of its max HP every second","When the Pokémon is not in combat, they are granted a shield that nullifies Sp. Atk damage equal to {value}% of their max Hp.","When the Pokémon receives a certain amount of damage, damage is dealt to nearby opposing Pokémon equal to {value}% of those Pokémon's max HP"
-Rank 1 Number,1,None,45,3,8,7,10,20,5,100,6,8,1,9,3
-Rank 2 Number,2,None,60,5,11,14,15,30,7.5,150,9,12,1.5,12,4
-Rank 3 Number,3,None,75,7,14,21,20,40,10,200,12,16,2,15,5
+Item,Description,Rank 1 Number,Rank 2 Number,Rank 3 Number
+Muscle Band,"When basic attacks hit, the damage is increased by {value}% of the opponent's opposing HP",1,2,3
+Scope Lens,"Increases the damage of basic attack critical hits. The higher the Pokemon's Attack, the more the damage increases",None,None,None
+Shell Bell,"When the Pokemon hits with a move, it recovers a minimum of {value} HP. The higher the Pokemon's Sp. Atk, the more HP it recovers",45,60,75
+WiseGlasses,Increases Sp. Atk by {value}%,3,5,7
+Focus Band,"When the Pokemon drops to low HP, then each second for three seconds, it recovers {value}% of the HP it had lost",8,11,14
+Energy Amplifier,"After the Pokemon uses its Unite Move, the damage the Pokemon deals is increased by {value}% for a short time",7,14,21
+Float Stone,Increases movement speed by {value}% when the Pokemon is not in combat,10,15,20
+Buddy Barrier,"When the Pokemon uses its Unite Move, that Pokemon and the nearby ally Pokemon with the lowest HP are each granted a shield equal to {value}% of their max HP",20,30,40
+Score Shield,"While the Pokemon is attempting to score a goal, it is granted a shield equal to {value}% of its max HP and its goals cannot be interrupted while it is shielded",5,7.5,10
+Aeos Cookie,"When the Pokemon scores a goal, its max HP increases by {value}",100,150,200
+Attack Weight,"When the Pokemon scores a goal, its Attack increases by {value}",6,9,12
+Sp Atk Specs,"When the Pokemon scores a goal, its Sp. Atk increases by {value}",8,12,16
+Leftovers,"When the Pokemon is not in combat, it recovers {value}% of its max HP every second",1,1.5,2
+Assault Vest,"When the Pokemon is not in combat, they are granted a shield that nullifies Sp. Atk damage equal to {value}% of their max Hp.",9,12,15
+Rocky Helmet,"When the Pokemon receives a certain amount of damage, damage is dealt to nearby opposing Pokemon equal to {value}% of those Pokemon's max HP",3,4,5

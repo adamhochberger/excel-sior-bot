@@ -5,7 +5,7 @@ from discord_slash import SlashCommand, SlashContext
 from discord_slash.utils.manage_commands import create_option, create_choice
 from dotenv import load_dotenv
 
-from PiotEnum import UniteInformation, UniteItems
+from UniteEnum import UniteInformation, UniteItems
 from UniteParser import UniteParser
 from utility_functions import convert_string_to_codeblock_string, split_string
 

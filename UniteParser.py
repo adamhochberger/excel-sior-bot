@@ -1,6 +1,6 @@
 import csv
 from tabulate import tabulate
-from PiotEnum import UniteInformation, UniteItems
+from UniteEnum import UniteInformation, UniteItems
 
 class UniteParser():
     
@@ -20,7 +20,7 @@ class UniteParser():
             return csv_as_list
 
     def read_description_from_csv(self):
-        csv_as_list = self.parse_csv("description_sheet.csv")
+        csv_as_list = self.parse_csv("unite_csv/description_sheet.csv")
         for row in csv_as_list:
             key_string = row[0]
 
@@ -38,7 +38,7 @@ class UniteParser():
                 return description_string
 
     def read_stats_from_csv(self):
-        csv_as_list = self.parse_csv("stat_sheet.csv")
+        csv_as_list = self.parse_csv("unite_csv/stat_sheet.csv")
         for row in csv_as_list:
             key_string = row[0]
 

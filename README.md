@@ -1,5 +1,5 @@
-# piot-bot
+# excel-sior-bot
 
-## A bot that is derived from my previous lol-wiki-bot
+## A Discord bot that outputs information I would usually calculate/obtain in a spreadsheet
 
-This bot will be written in Python and allow for easier customization and will feature the new slash commands currently in beta.
+This bot is written in Python 3.8.10 and utilizes the newly-introduced slash commands to provide feedback and information on potential parameters.

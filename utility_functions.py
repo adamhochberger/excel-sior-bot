@@ -1,5 +1,6 @@
 from typing import List
 
+
 def split_string(table_string: str) -> List[str]:
     n = 1994
     if len(table_string) > n:
@@ -20,6 +21,7 @@ def split_string(table_string: str) -> List[str]:
         return chunks
     else:
         return [table_string]
+
 
 def convert_string_to_codeblock_string(string_to_format: str) -> str:
     return f"```{string_to_format}```"

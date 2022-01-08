@@ -25,4 +25,3 @@ class UniteInformation(BaseEnum):
     ITEM_ENHANCERS_PER_LEVEL = 'Item Enhancers / Level'
     DOLLARS = 'Dollars'
     DOLLARS_PER_LEVEL = 'Dollars / Level'
-    

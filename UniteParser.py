@@ -1,8 +1,9 @@
 import csv
 from tabulate import tabulate
-from UniteEnum import UniteInformation, UniteItems
+from UniteEnum import UniteInformation
 
-class UniteParser():
+
+class UniteParser:
     
     def __init__(self, item):
         self.COLUMN_LIST = [UniteInformation.LEVELS.value, item]
@@ -48,8 +49,3 @@ class UniteParser():
 
         item_table_string = tabulate(self.item_dictionary, headers="keys", tablefmt="pretty")
         return item_table_string
-
-# if __name__ == "__main__":
-    
-#     print(UniteParser(UniteItems.SCOPE_LENS.value).read_description_from_csv())
-#     print(UniteParser(UniteItems.SCOPE_LENS.value).read_stats_from_csv())

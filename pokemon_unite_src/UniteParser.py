@@ -1,6 +1,6 @@
 import csv
 from tabulate import tabulate
-from UniteEnum import UniteInformation
+from pokemon_unite_src.UniteEnum import UniteInformation
 
 
 class UniteParser:

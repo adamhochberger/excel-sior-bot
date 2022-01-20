@@ -1,11 +1,11 @@
 from datetime import datetime, timedelta
 
 MAX_RESIN_VALUE = 160
-
+MINUTES_PER_RESIN = 8
 
 def get_refresh_datetime_from_resin_value(current_resin_value: int) -> str:
     resin_remaining = MAX_RESIN_VALUE - current_resin_value
-    minutes_remaining = 10 * resin_remaining
+    minutes_remaining = MINUTES_PER_RESIN * resin_remaining
 
     current_time = datetime.now()
 

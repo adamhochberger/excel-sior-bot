@@ -7,6 +7,8 @@ from discord_slash.utils.manage_commands import create_option, create_choice
 from dotenv import load_dotenv
 
 from genshin_src.get_refresh_datetime_from_resin_value import get_refresh_datetime_from_resin_value
+from genshin_src.get_talent_materials_for_ascenscion import get_talent_materials_for_ascenscion
+
 from pokemon_unite_src.UniteEnum import UniteItems
 from pokemon_unite_src.unite_item_print import get_unite_item_table_string_list
 
@@ -61,7 +63,32 @@ async def _ping(ctx: SlashContext):
         )
     ]
 )
-async def _resin_time(ctx: SlashContext, current_resin_value: int):
+async def _resin_timer(ctx: SlashContext, current_resin_value: int):
     await ctx.send(get_refresh_datetime_from_resin_value(current_resin_value))
+
+
+@slash.slash(
+    name="get_ascenscion_talent_materials",
+    description="Allows you to check how many materials need to ascend in Genshin Impact",
+    guild_ids=GUILD,
+    options=[
+        create_option(
+            name="current_talent_value",
+            description="This is what level you currently have for a talent",
+            option_type=4,
+            choices=[number for number in range(1,11)],
+            required=True
+        ),
+        create_option(
+            name="target_talent_value",
+            description="This is what level you want to have for a talent",
+            option_type=4,
+            choices=[number for number in range(1,11)],
+            required=True
+        )
+    ]
+)
+async def get_ascenscion_talent_materials(ctx: SlashContext, current_talent_value: int, target_talent_value: int):
+    await ctx.send(get_talent_materials_for_ascenscion(current_talent_value, target_talent_value))
 
 bot.run(TOKEN)

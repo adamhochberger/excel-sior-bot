@@ -1,7 +1,5 @@
 from datetime import datetime, timedelta
-
-MAX_RESIN_VALUE = 160
-MINUTES_PER_RESIN = 8
+from .constants import MAX_RESIN_VALUE, MINUTES_PER_RESIN
 
 def get_refresh_datetime_from_resin_value(current_resin_value: int) -> str:
     resin_remaining = MAX_RESIN_VALUE - current_resin_value

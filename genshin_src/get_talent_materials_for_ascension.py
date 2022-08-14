@@ -1,23 +1,23 @@
-from .constants import ASCENSCION_MATERIALS_PER_LEVEL_DICTIONARY_LIST, GREEN_TO_BLUE_BOOK_MULTIPLIER, GREEN_TO_PURPLE_BOOK_MULTIPLIER
+from .constants import ASCENSION_MATERIALS_PER_LEVEL_DICTIONARY_LIST, GREEN_TO_BLUE_BOOK_MULTIPLIER, GREEN_TO_PURPLE_BOOK_MULTIPLIER
     
 
-def get_talent_materials_for_ascenscion(current_talent_level: int, target_talent_level: int) -> str:
+def get_talent_materials_for_ascension(current_talent_level: int, target_talent_level: int) -> str:
     if target_talent_level <= current_talent_level:
         return f"The target talent level ({target_talent_level}) needs to be greater than the current target level {current_talent_level}."
 
-    list_of_ascenscions = ASCENSCION_MATERIALS_PER_LEVEL_DICTIONARY_LIST[current_talent_level-1:target_talent_level-1]
+    list_of_ascensions = ASCENSION_MATERIALS_PER_LEVEL_DICTIONARY_LIST[current_talent_level-1:target_talent_level-1]
 
     stat_dictionary = {
         'mora': 0, 'character_material': {'white': 0, 'green': 0, 'blue': 0}, 'book': {'green': 0, 'blue': 0, 'purple': 0}, 'boss_material': 0, 'crown': 0
     }
 
-    for ascenscion_dictionary in list_of_ascenscions:
-        for key, value in ascenscion_dictionary.items():
+    for ascension_dictionary in list_of_ascensions:
+        for key, value in ascension_dictionary.items():
             if type(value) == tuple:
                 substat_type = value[0]
                 stat_dictionary[key][substat_type] += value[1]
             else: 
-                stat_dictionary[key] += ascenscion_dictionary[key]
+                stat_dictionary[key] += ascension_dictionary[key]
 
     green_book_equivalent = get_green_book_equivalent(stat_dictionary['book'])
     minimum_domain_runs = round(green_book_equivalent / 8)
@@ -43,6 +43,7 @@ def get_talent_materials_for_ascenscion(current_talent_level: int, target_talent
         f"```"
 
     return message_string
+
 
 def get_green_book_equivalent(book_dictionary: dict) -> int:
     return book_dictionary['green'] + book_dictionary['blue'] * GREEN_TO_BLUE_BOOK_MULTIPLIER + book_dictionary['purple'] * GREEN_TO_PURPLE_BOOK_MULTIPLIER

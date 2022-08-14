@@ -3,7 +3,7 @@ GREEN_TO_PURPLE_BOOK_MULTIPLIER = 9
 MAX_RESIN_VALUE = 160
 MINUTES_PER_RESIN = 8
 
-ASCENSCION_MATERIALS_PER_LEVEL_DICTIONARY_LIST = [
+ASCENSION_MATERIALS_PER_LEVEL_DICTIONARY_LIST = [
     {'mora': 12_500, 'character_material': ('white', 3), 'book': ('green', 3)}, {'mora': 17_500, 'character_material': ('green', 3), 'book': ('blue', 2)}, 
     {'mora': 25_000, 'character_material': ('green', 4), 'book': ('blue', 4)}, {'mora': 30_000, 'character_material': ('green', 6), 'book': ('blue', 6)}, 
     {'mora': 37_500, 'character_material': ('green', 9), 'book': ('blue', 9)}, {'mora': 120_000, 'character_material': ('blue', 4), 'book': ('purple', 4), 'boss_material': 1}, 

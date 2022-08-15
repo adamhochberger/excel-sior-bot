@@ -82,28 +82,28 @@ async def _resin_timer(ctx: interactions.CommandContext, current_resin_value: in
     await ctx.send(get_refresh_datetime_from_resin_value(current_resin_value))
 
 
-@bot.command(
-    name="ascension_talent_materials",
-    description="Allows you to check how many materials need to ascend in Genshin Impact",
-    scope=GUILD,
-    options=[
-        interactions.Option(
-            name="current_talent_value",
-            description="This is what level you currently have for a talent",
-            type=interactions.OptionType.INTEGER,
-            choices=[number for number in range(1, 11)],
-            required=True
-        ),
-        interactions.Option(
-            name="target_talent_value",
-            description="This is what level you want to have for a talent",
-            type=interactions.OptionType.INTEGER,
-            choices=[number for number in range(1, 11)],
-            required=True
-        )
-    ]
-)
-async def _ascension_talent_materials(ctx: interactions.CommandContext, current_talent_value: int, target_talent_value: int):
-    await ctx.send(get_talent_materials_for_ascension(current_talent_value, target_talent_value))
+# @bot.command(
+#     name="ascension_talent_materials",
+#     description="Allows you to check how many materials need to ascend in Genshin Impact",
+#     scope=GUILD,
+#     options=[
+#         interactions.Option(
+#             name="current_talent_value",
+#             description="This is what level you currently have for a talent",
+#             type=interactions.OptionType.INTEGER,
+#             required=True,
+#             choices=[number for number in range(1, 11)],
+#         ),
+#         interactions.Option(
+#             name="target_talent_value",
+#             description="This is what level you want to have for a talent",
+#             type=interactions.OptionType.INTEGER,
+#             required=True,
+#             choices=[number for number in range(1, 11)]
+#         )
+#     ]
+# )
+# async def _ascension_talent_materials(ctx: interactions.CommandContext, current_talent_value: int, target_talent_value: int):
+#     await ctx.send(get_talent_materials_for_ascension(current_talent_value, target_talent_value))
 
 bot.start()

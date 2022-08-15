@@ -32,12 +32,12 @@ async def on_ready():
     scope=GUILD,
     options=[
             interactions.Option(
-                name=f"player_name",
+                name=f"player{num}",
                 description="This is the item that you want to view stats on.",
                 type=interactions.OptionType.STRING,
                 required=True,
                 choices=[interactions.Choice(name=item, value=item) for item in PlayerNames.values_list()]
-            )
+            ) for num in range(1, 6)
     ]
 )
 async def _smite_night_roles(ctx: interactions.CommandContext, **kwargs):

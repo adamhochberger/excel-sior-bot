@@ -11,7 +11,7 @@ from genshin_src.get_talent_materials_for_ascension import get_talent_materials_
 from pokemon_unite_src.UniteEnum import UniteItems
 from pokemon_unite_src.unite_item_print import get_unite_item_table_string_list
 from random_src.PlayerNames import PlayerNames
-from random_src.generate_role_for_player import generate_role_for_player
+from random_src.generate_roles_for_player_dictionary import generate_roles_for_player_dictionary
 
 load_dotenv()
 
@@ -40,10 +40,11 @@ async def on_ready():
             )
     ]
 )
-async def _smite_night_roles(ctx: interactions.CommandContext, player_name: str):
-    result_message = generate_role_for_player([player_name])
+async def _smite_night_roles(ctx: interactions.CommandContext, **kwargs):
+    result_message = generate_roles_for_player_dictionary(player_dictionary=kwargs)
     await ctx.send(result_message)
-#
+
+
 
 @bot.command(
     name="unite_item",

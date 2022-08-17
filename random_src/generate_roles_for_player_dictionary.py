@@ -1,6 +1,9 @@
+import random
 from typing import Dict, List
 
 from utils.list_has_unique_values import list_has_unique_values
+
+ROLE_NAME_LIST = ["ASSASSIN", "GUARDIAN", "HUNTER", "MAGE", "WARRIOR"]
 
 
 def generate_roles_for_player_dictionary(player_dictionary: Dict[str, str]) -> str:
@@ -11,10 +14,13 @@ def generate_roles_for_player_dictionary(player_dictionary: Dict[str, str]) -> s
         error_string = _get_unique_player_name_error_string(player_name_list)
         return error_string
 
+    random.shuffle(player_name_list)
+    random.shuffle(ROLE_NAME_LIST)
+
     result_string = ""
 
-    for player_number, player_name in player_dictionary.items():
-        result_string += f"{player_number} - {player_name}\n"
+    for player, role in zip(player_name_list, ROLE_NAME_LIST):
+        result_string += f"{player} - {role}\n"
 
     return result_string
 

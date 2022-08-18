@@ -12,6 +12,7 @@ from pokemon_unite_src.UniteEnum import UniteItems
 from pokemon_unite_src.unite_item_print import get_unite_item_table_string_list
 from random_src.PlayerNames import PlayerNames
 from random_src.generate_roles_for_player_dictionary import generate_roles_for_player_dictionary
+from utils.get_list_of_options import get_list_of_options
 
 load_dotenv()
 
@@ -30,15 +31,14 @@ async def on_ready():
     name="smite_night_roles",
     description="Randomly assigns rolls to each player",
     scope=GUILD,
-    options=[
-            interactions.Option(
-                name=f"player{num}",
-                description="This is the item that you want to view stats on.",
-                type=interactions.OptionType.STRING,
-                required=True,
-                choices=[interactions.Choice(name=item, value=item) for item in PlayerNames.values_list()]
-            ) for num in range(1, 6)
-    ]
+    options=get_list_of_options(
+        number_of_options=5,
+        names=[f"player_{num}" for num in range(1, 6)],
+        description="Add a player to generate a role for (all options beyond the first are optional",
+        types=interactions.OptionType.STRING,
+        required=[True] + [False]*5,
+        choices=[interactions.Choice(name=name, value=name) for name in PlayerNames.values_list()]
+    )
 )
 async def _smite_night_roles(ctx: interactions.CommandContext, **kwargs):
     result_message = generate_roles_for_player_dictionary(player_dictionary=kwargs)

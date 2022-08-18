@@ -9,6 +9,34 @@ NON_PREFERRED_WEIGHT = 1
 
 ROLE_NAME_LIST = ["ASSASSIN", "GUARDIAN", "HUNTER", "MAGE", "WARRIOR"]
 
+PLAYER_PREFERENCE_DICTIONARY = {
+    "Adam": {
+        "preferred": "GUARDIAN",
+        "non_preferred": "ASSASSIN"
+    },
+    "Annan": {
+        "preferred": "MAGE",
+        "non_preferred": ""
+    },
+    "Brady": {
+        "preferred": "ASSASSIN",
+        "non_preferred": "HUNTER"
+    },
+    "Giancarlo": {
+        "preferred": "HUNTER",
+        "non_preferred": "ASSASSIN"
+    },
+    "Jonathan": {
+        "preferred": "",
+        "non_preferred": "ASSASSIN"
+    },
+    "Michael": {
+        "preferred": "HUNTER",
+        "non_preferred": "WARRIOR"
+    }
+
+}
+
 
 def generate_roles_for_player_dictionary(player_dictionary: Dict[str, str]) -> str:
     player_name_list = list(player_dictionary.values())

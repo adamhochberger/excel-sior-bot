@@ -3,6 +3,10 @@ from typing import Dict, List
 
 from utils.list_has_unique_values import list_has_unique_values
 
+PREFERRED_WEIGHT = 6
+NEUTRAL_WEIGHT = 2
+NON_PREFERRED_WEIGHT = 1
+
 ROLE_NAME_LIST = ["ASSASSIN", "GUARDIAN", "HUNTER", "MAGE", "WARRIOR"]
 
 

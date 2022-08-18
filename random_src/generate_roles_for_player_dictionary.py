@@ -73,7 +73,8 @@ def get_role_probability_string(role_order: List[str], player_name_list: List[st
 
     result_message = ""
 
-    for role in role_order:
+    for index in range(0, len(players_that_need_roles)):
+        role = role_order[index]
         preferred_players = []
         neutral_players = []
         non_preferred_players = []

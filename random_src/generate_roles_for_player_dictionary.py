@@ -47,12 +47,11 @@ def generate_roles_for_player_dictionary(player_dictionary: Dict[str, str]) -> s
         return error_string
 
     random.shuffle(player_name_list)
-    random.shuffle(ROLE_NAME_LIST)
 
-    result_string = ""
+    role_list = deepcopy(ROLE_NAME_LIST)
+    random.shuffle(role_list)
 
-    for player, role in zip(player_name_list, ROLE_NAME_LIST):
-        result_string += f"{player} - {role}\n"
+    result_string = get_role_probability_dictionary(role_order=role_list, player_name_list=player_name_list)
 
     return result_string
 

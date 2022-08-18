@@ -94,9 +94,9 @@ def get_role_probability_string(role_order: List[str], player_name_list: List[st
         total_probability_score = PREFERRED_WEIGHT * preferred_player_count + NEUTRAL_WEIGHT * neutral_player_count + \
             NON_PREFERRED_WEIGHT * non_preferred_player_count
 
-        preferred_probability = PREFERRED_WEIGHT / total_probability_score
-        neutral_probability = NEUTRAL_WEIGHT / total_probability_score
-        non_preferred_probability = NON_PREFERRED_WEIGHT / total_probability_score
+        preferred_probability = PREFERRED_WEIGHT / total_probability_score if total_probability_score > 0 else PREFERRED_WEIGHT
+        neutral_probability = NEUTRAL_WEIGHT / total_probability_score if total_probability_score > 0 else NEUTRAL_WEIGHT
+        non_preferred_probability = NON_PREFERRED_WEIGHT / total_probability_score if total_probability_score > 0 else NON_PREFERRED_WEIGHT
 
         print(role)
         name_list = preferred_players + neutral_players + non_preferred_players

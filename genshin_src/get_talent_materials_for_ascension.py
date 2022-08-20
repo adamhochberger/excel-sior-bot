@@ -23,7 +23,7 @@ def get_talent_materials_for_ascension(current_talent_level: int, target_talent_
     minimum_domain_runs = round(green_book_equivalent / 8)
 
     message_string = \
-        f"```"+ \
+        f"```" + \
         f"GBE: {get_green_book_equivalent(stat_dictionary['book'])}\n" + \
         f"Required materials from talent level {current_talent_level} to {target_talent_level}\n" + \
         f"Maximum number of 20 resin domain runs for talents (assuming 2/2/0 and no Xingqiu): {minimum_domain_runs}\n" + \

@@ -44,20 +44,19 @@ async def _check_minecraft_server(ctx: interactions.CommandContext):
 @create_task(IntervalTrigger(30))
 async def _ping_minecraft_server_loop():
     channel_id_for_status = int(os.getenv("SERVER_STATUS_CHANNEL_ID"))
-    bot_author_id = int(os.getenv("BOT_AUTHOR_ID"))
     message = check_minecraft_server_status()
 
     if message != bot.last_server_status:
         bot.last_server_status = message
         channel = interactions.Channel(**await bot._http.get_channel(channel_id_for_status), _client=bot._http)
-        messages = (await channel.get_history())  # ID of bot
+        pinned_messages = (await channel.get_pinned_messages())  # ID of bot
 
-        for msg in messages:
-            if msg.author.id == bot_author_id:
-                await msg.delete()
-                break
-        await channel.send(message)
-
+        if pinned_messages:
+            first_message = pinned_messages[0]
+            await first_message.edit(content=message)
+        else:
+            sent_message = await channel.send(message)
+            await channel.pin_message(sent_message.id)
 
 @bot.command(
     name="smite_night_roles",

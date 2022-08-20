@@ -26,9 +26,9 @@ def check_minecraft_server_status():
 
         player_name_string = f'{", ".join(player_names)}' if player_count > 0 else "None"
         current_datetime = datetime.now()
-        datetime_string = current_datetime.strftime("%Y/%m/%d %H:%M:%S")
+        datetime_string = current_datetime.strftime("%d/%m/%Y %I:%M:%S %p")
 
-        result_message = f"As of {datetime_string}\n: " + \
+        result_message = f"As of {datetime_string}: \n" + \
                          f"The server currently has {player_count}/{player_max} players\n" + \
                          f"Players: {player_name_string}\n" + \
                          f"MOTD: {query.motd}"

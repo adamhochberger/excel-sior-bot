@@ -21,11 +21,42 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD = [int(os.getenv('DISCORD_GUILD'))]
 
 bot = interactions.Client(token=TOKEN, default_scope=GUILD)
+bot.last_server_status = SERVER_OFFLINE_MESSAGE
 
 
 @bot.event
 async def on_ready():
+    _ping_minecraft_server_loop.start()
     print("Ready!")
+
+
+@bot.command(
+    name="check_minecraft_server",
+    description="Ping if server is online",
+    scope=GUILD,
+)
+async def _check_minecraft_server(ctx: interactions.CommandContext):
+    result_message = check_minecraft_server_status()
+    bot.last_server_status = result_message
+    await ctx.send(result_message)
+
+
+@create_task(IntervalTrigger(30))
+async def _ping_minecraft_server_loop():
+    channel_id_for_status = os.getenv("SERVER_STATUS_CHANNEL_ID")
+    bot_author_id = os.getenv("BOT_AUTHOR_ID")
+    message = check_minecraft_server_status()
+
+    if message != bot.last_server_status:
+        bot.last_server_status = message
+        channel = interactions.Channel(**await bot._http.get_channel(channel_id_for_status), _client=bot._http)
+        messages = (await channel.get_history())  # ID of bot
+
+        for msg in messages:
+            if msg.author.id == bot_author_id:
+                await msg.delete()
+                break
+        await channel.send(message)
 
 
 @bot.command(

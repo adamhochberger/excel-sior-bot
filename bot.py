@@ -1,9 +1,9 @@
 # bot.py
 import os
 
-from discord import Intents
 from dotenv import load_dotenv
 import interactions
+from interactions.ext.tasks import create_task, IntervalTrigger
 
 from genshin_src.get_refresh_datetime_from_resin_value import get_refresh_datetime_from_resin_value
 from genshin_src.get_talent_materials_for_ascension import get_talent_materials_for_ascension
@@ -13,6 +13,7 @@ from pokemon_unite_src.unite_item_print import get_unite_item_table_string_list
 from random_src.PlayerNames import PlayerNames
 from random_src.generate_roles_for_player_dictionary import generate_roles_for_player_dictionary
 from utils.get_list_of_options import get_list_of_options
+from utils.check_minecraft_server_status import check_minecraft_server_status, SERVER_OFFLINE_MESSAGE
 
 load_dotenv()
 

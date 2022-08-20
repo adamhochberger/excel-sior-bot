@@ -1,5 +1,6 @@
 import os
 import socket
+from datetime import datetime
 
 from mcstatus import JavaServer
 from dotenv import load_dotenv
@@ -24,8 +25,11 @@ def check_minecraft_server_status():
         player_names = query.players.names
 
         player_name_string = f'{", ".join(player_names)}' if player_count > 0 else "None"
+        current_datetime = datetime.now()
+        datetime_string = current_datetime.strftime("%Y/%m/%d %H:%M:%S")
 
-        result_message = f"The server currently has {player_count}/{player_max} players\n" + \
+        result_message = f"As of {datetime_string}\n: " + \
+                         f"The server currently has {player_count}/{player_max} players\n" + \
                          f"Players: {player_name_string}\n" + \
                          f"MOTD: {query.motd}"
     except socket.timeout:

@@ -2,6 +2,7 @@ import random
 from copy import deepcopy
 from typing import Dict, List
 
+from random_src.GodRoles import GOD_ROLE_DICTIONARY
 from utils.list_has_unique_values import list_has_unique_values
 
 PREFERRED_WEIGHT = 6
@@ -108,7 +109,10 @@ def get_role_probability_string(role_order: List[str], player_name_list: List[st
         print(probability_list)
 
         random_player = random.choices(name_list, weights=probability_list, k=1)[0]
-        result_message += f"{random_player} - {role}\n"
+
+        random_god_for_role = random.choice(GOD_ROLE_DICTIONARY[role])
+
+        result_message += f"{random_player} - {role} ({random_god_for_role})\n"
 
         players_that_need_roles.remove(random_player)
 

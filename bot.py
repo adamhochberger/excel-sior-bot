@@ -43,8 +43,8 @@ async def _check_minecraft_server(ctx: interactions.CommandContext):
 
 @create_task(IntervalTrigger(30))
 async def _ping_minecraft_server_loop():
-    channel_id_for_status = os.getenv("SERVER_STATUS_CHANNEL_ID")
-    bot_author_id = os.getenv("BOT_AUTHOR_ID")
+    channel_id_for_status = int(os.getenv("SERVER_STATUS_CHANNEL_ID"))
+    bot_author_id = int(os.getenv("BOT_AUTHOR_ID"))
     message = check_minecraft_server_status()
 
     if message != bot.last_server_status:
@@ -75,7 +75,6 @@ async def _ping_minecraft_server_loop():
 async def _smite_night_roles(ctx: interactions.CommandContext, **kwargs):
     result_message = generate_roles_for_player_dictionary(player_dictionary=kwargs)
     await ctx.send(result_message)
-
 
 
 @bot.command(
@@ -114,28 +113,29 @@ async def _resin_timer(ctx: interactions.CommandContext, current_resin_value: in
     await ctx.send(get_refresh_datetime_from_resin_value(current_resin_value))
 
 
-# @bot.command(
-#     name="ascension_talent_materials",
-#     description="Allows you to check how many materials need to ascend in Genshin Impact",
-#     scope=GUILD,
-#     options=[
-#         interactions.Option(
-#             name="current_talent_value",
-#             description="This is what level you currently have for a talent",
-#             type=interactions.OptionType.INTEGER,
-#             required=True,
-#             choices=[number for number in range(1, 11)],
-#         ),
-#         interactions.Option(
-#             name="target_talent_value",
-#             description="This is what level you want to have for a talent",
-#             type=interactions.OptionType.INTEGER,
-#             required=True,
-#             choices=[number for number in range(1, 11)]
-#         )
-#     ]
-# )
-# async def _ascension_talent_materials(ctx: interactions.CommandContext, current_talent_value: int, target_talent_value: int):
-#     await ctx.send(get_talent_materials_for_ascension(current_talent_value, target_talent_value))
+@bot.command(
+    name="ascension_talent_materials",
+    description="Allows you to check how many materials need to ascend in Genshin Impact",
+    scope=GUILD,
+    options=[
+        interactions.Option(
+            name="current_talent_value",
+            description="This is what level you currently have for a talent",
+            type=interactions.OptionType.INTEGER,
+            required=True,
+            choices=[interactions.Choice(name=number, value=number) for number in range(1, 11)]
+        ),
+        interactions.Option(
+            name="target_talent_value",
+            description="This is what level you want to have for a talent",
+            type=interactions.OptionType.INTEGER,
+            required=True,
+            choices=[interactions.Choice(name=number, value=number) for number in range(1, 11)]
+        )
+    ]
+)
+async def _ascension_talent_materials(ctx: interactions.CommandContext, current_talent_value: int, target_talent_value: int):
+    await ctx.send(get_talent_materials_for_ascension(current_talent_value, target_talent_value))
+
 
 bot.start()

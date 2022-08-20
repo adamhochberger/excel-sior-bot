@@ -13,7 +13,7 @@ from pokemon_unite_src.unite_item_print import get_unite_item_table_string_list
 from random_src.PlayerNames import PlayerNames
 from random_src.generate_roles_for_player_dictionary import generate_roles_for_player_dictionary
 from utils.get_list_of_options import get_list_of_options
-from utils.check_minecraft_server_status import check_minecraft_server_status, SERVER_OFFLINE_MESSAGE
+from utils.check_minecraft_server_status import check_minecraft_server_status
 
 load_dotenv()
 
@@ -21,7 +21,6 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 GUILD = [int(os.getenv('DISCORD_GUILD'))]
 
 bot = interactions.Client(token=TOKEN, default_scope=GUILD)
-bot.last_server_status = SERVER_OFFLINE_MESSAGE
 
 
 @bot.event
@@ -37,7 +36,6 @@ async def on_ready():
 )
 async def _check_minecraft_server(ctx: interactions.CommandContext):
     result_message = check_minecraft_server_status()
-    bot.last_server_status = result_message
     await ctx.send(result_message)
 
 
@@ -46,17 +44,15 @@ async def _ping_minecraft_server_loop():
     channel_id_for_status = int(os.getenv("SERVER_STATUS_CHANNEL_ID"))
     message = check_minecraft_server_status()
 
-    if message != bot.last_server_status:
-        bot.last_server_status = message
-        channel = interactions.Channel(**await bot._http.get_channel(channel_id_for_status), _client=bot._http)
-        pinned_messages = (await channel.get_pinned_messages())  # ID of bot
+    channel = interactions.Channel(**await bot._http.get_channel(channel_id_for_status), _client=bot._http)
+    pinned_messages = (await channel.get_pinned_messages())
 
-        if pinned_messages:
-            first_message = pinned_messages[0]
-            await first_message.edit(content=message)
-        else:
-            sent_message = await channel.send(message)
-            await channel.pin_message(sent_message.id)
+    if pinned_messages:
+        first_message = pinned_messages[0]
+        await first_message.edit(content=message)
+    else:
+        sent_message = await channel.send(message)
+        await channel.pin_message(sent_message.id)
 
 @bot.command(
     name="smite_night_roles",

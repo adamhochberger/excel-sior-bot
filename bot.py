@@ -25,6 +25,9 @@ bot = interactions.Client(token=TOKEN, default_scope=GUILD)
 channel_for_server = None
 last_pinned_message = None
 
+# TODO: Add class to keep track of global constants and cleanup logic
+
+
 @bot.event
 async def on_ready():
     _ping_minecraft_server_loop.start()

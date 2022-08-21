@@ -23,6 +23,7 @@ CHANNEL_ID_FOR_STATUS = int(os.getenv("SERVER_STATUS_CHANNEL_ID"))
 
 bot = interactions.Client(token=TOKEN, default_scope=GUILD)
 channel_for_server = None
+last_pinned_message = None
 
 @bot.event
 async def on_ready():
@@ -46,15 +47,19 @@ async def _ping_minecraft_server_loop():
     message = check_minecraft_server_status()
 
     global channel_for_server
+    global last_pinned_message
 
     if not channel_for_server:
         channel_for_server = interactions.Channel(**await bot._http.get_channel(channel_id_for_status), _client=bot._http)
 
-    pinned_messages = (await channel_for_server.get_pinned_messages())
+    if not last_pinned_message:
+        pinned_messages = (await channel_for_server.get_pinned_messages())
 
-    if pinned_messages:
-        first_message = pinned_messages[0]
-        await first_message.edit(content=message)
+        if pinned_messages:
+            last_pinned_message = pinned_messages[0]
+
+    if last_pinned_message:
+        await last_pinned_message.edit(content=message)
     else:
         sent_message = await channel_for_server.send(message)
         await channel_for_server.pin_message(sent_message.id)

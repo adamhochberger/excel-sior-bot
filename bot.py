@@ -62,7 +62,12 @@ async def _ping_minecraft_server_loop():
             last_pinned_message = pinned_messages[0]
 
     if last_pinned_message:
-        await last_pinned_message.edit(content=message)
+        try:
+            await last_pinned_message.edit(content=message)
+        except AttributeError:
+            sent_message = await channel_for_server.send(message)
+            last_pinned_message = None
+            await channel_for_server.pin_message(sent_message.id)
     else:
         sent_message = await channel_for_server.send(message)
         await channel_for_server.pin_message(sent_message.id)

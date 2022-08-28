@@ -30,6 +30,7 @@ last_pinned_message = None
 
 @bot.event
 async def on_ready():
+    _ping_minecraft_server_loop.stop()
     _ping_minecraft_server_loop.start()
     print("Ready!")
 
